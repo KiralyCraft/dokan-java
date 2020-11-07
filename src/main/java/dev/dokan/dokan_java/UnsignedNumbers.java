@@ -150,11 +150,11 @@ public class UnsignedNumbers {
     }
 
     public static int compareUnsigned(byte x, byte y) {
-        return Byte.compareUnsigned(x, y);
+    	return Integer.compare(x+Byte.MIN_VALUE, y+Byte.MIN_VALUE);
     }
 
     public static int compareUnsigned(short x, short y) {
-        return Short.compareUnsigned(x, y);
+    	return Integer.compare(x+Short.MIN_VALUE, y+Short.MIN_VALUE);
     }
 
     public static int compareUnsigned(int x, int y) {

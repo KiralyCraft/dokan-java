@@ -253,10 +253,28 @@ public abstract class AbstractDokanFileSystem implements DokanFileSystem {
 
 		@Unsigned int length = lengthPointer.getValue();
 		List<DokanControl> list = DokanControl.getDokanControlList(startOfList, length);
+		boolean mountPointInList = false;
 		// It is not enough that the entry.MountPoint contains the actual mount point. It also has to ends afterwards.
-		boolean mountPointInList = list.stream().anyMatch(entry ->
-				Arrays.equals(entry.MountPoint, 12, 12 + mntPtCharArray.length, mntPtCharArray, 0, mntPtCharArray.length)
-						&& (entry.MountPoint.length == 12 + mntPtCharArray.length || entry.MountPoint[12 + mntPtCharArray.length] == '\0'));
+		
+		final int entryOffset = 12;
+		for (DokanControl entry:list)
+		{
+			boolean arrayMatches = true;
+			for (int i=0;i<mntPtCharArray.length;i++)
+			{
+				if (entry.MountPoint[i+entryOffset] != mntPtCharArray[i])
+				{
+					arrayMatches = false;
+					break;
+				}
+			}
+			if (arrayMatches && (entry.MountPoint.length == 12 + mntPtCharArray.length || entry.MountPoint[12 + mntPtCharArray.length] == '\0'))
+			{
+				mountPointInList = true;
+				break;
+			}
+		}
+//		boolean mountPointInList = list.stream().anyMatch(entry -> Arrays.equals(entry.MountPoint, 12, 12 + mntPtCharArray.length, mntPtCharArray, 0, mntPtCharArray.length) && (entry.MountPoint.length == 12 + mntPtCharArray.length || entry.MountPoint[12 + mntPtCharArray.length] == '\0'));
 		DokanNativeMethods.DokanReleaseMountPointList(startOfList);
 		return mountPointInList;
 	}
