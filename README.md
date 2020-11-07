@@ -1,4 +1,4 @@
-Dokan-Java
+Dokan-Java (Java 8 compatibility)
 ======
 
 Dokan-Java is a Java wrapper for [Dokany 1.3.0 releases](https://github.com/dokan-dev/dokany/releases) and above.
