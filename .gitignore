@@ -54,3 +54,5 @@ hs_err_pid*
 .DS_Store
 /bin/
 /libs/
+/.project
+/.classpath
