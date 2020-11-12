@@ -9,7 +9,7 @@ It is natively  written in C/C++. Usually a Java developer, who would like to ut
 Using this project you are able to implement your own filesystem on Windows... in Java!
 
 ## Runtime Dependencies
-dokan-java requires [Java JRE 11](https://jdk.java.net/11/).
+~~dokan-java requires [Java JRE 11](https://jdk.java.net/11/).~~ It works with Java 8 apparently
 
 All dependencies can be seen in the dependecies section of [the build file](build.gradle).
 The following are the primary dependencies:
